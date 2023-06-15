@@ -1,0 +1,17 @@
+name: Checks
+on:
+    workflow_dispatch:
+    pull_request:
+    push:
+        branches:
+            - main
+        paths-ignore:
+            - 'docs/**'
+
+jobs:
+    hello:
+        name: Hello World
+        runs-on: ubuntu-latest
+        steps:
+            - name: Print message
+              run: echo "Hello World"
