@@ -2,6 +2,7 @@ name: Checks
 on:
     workflow_dispatch:
     pull_request:
+        types: [ opened, synchronize, unlabeled ]
         paths-ignore:
             - 'docs/**'
     push:
@@ -14,6 +15,8 @@ jobs:
     hello:
         name: Hello World
         runs-on: ubuntu-latest
+        if: ${{ !contains(github.event.pull_request.labels.*.name, 'WIP') && !(github.event.action == 'unlabeled' && github.event.label.name != 'WIP') }}
+        # if: "!contains(github.event.pull_request.labels.*.name, 'WIP')"
         steps:
             - name: Print message
               run: echo "Hello World"
