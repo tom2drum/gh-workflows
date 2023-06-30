@@ -1,0 +1,13 @@
+name: Pre-release
+on:
+    release:
+        types: [ created, edited ]
+
+jobs:
+    hello:
+        name: Hello World
+        runs-on: ubuntu-latest
+        if: ${{ github.event.release.prerelease }}
+        steps:
+            - name: Print message
+              run: echo "Hello World"
