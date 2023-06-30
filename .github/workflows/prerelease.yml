@@ -1,7 +1,9 @@
 name: Pre-release
+
 on:
+    workflow_dispatch:
     release:
-        types: [ published, edited ]
+        types: [ prereleased ]
 
 jobs:
     hello:
