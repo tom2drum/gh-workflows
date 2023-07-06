@@ -1,17 +1,27 @@
-name: Checks
+name: Issue management
 on:
     issues:
         types: [ closed ]
 
 jobs:
-    hello:
-        name: Hello World
+    not_planned_issue:
+        name: Message about not planned issue
         runs-on: ubuntu-latest
+        if: ${{ github.event.action == 'closed' && !github.event.issue.pull_request.url && github.event.issue.state_reason == 'not_planned' }}
         steps:
             - name: Print message
               env:
                 ISSUE_NUMBER: ${{ github.event.issue.number }}
-                STATE_REASON: ${{ github.event.issue.state_reason }}
               run: |
-                echo "issue: $ISSUE_NUMBER"
-                echo "reason: $STATE_REASON"
+                echo "not planned issue: $ISSUE_NUMBER"
+
+    completed_issue:
+        name: Message about completed issue
+        runs-on: ubuntu-latest
+        if: ${{ github.event.action == 'closed' && !github.event.issue.pull_request.url && github.event.issue.state_reason == 'completed' }}
+        steps:
+            - name: Print message
+              env:
+                ISSUE_NUMBER: ${{ github.event.issue.number }}
+              run: |
+                echo "completed issue: $ISSUE_NUMBER"
