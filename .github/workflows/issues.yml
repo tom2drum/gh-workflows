@@ -1,0 +1,17 @@
+name: Checks
+on:
+    issues:
+        types: [ closed ]
+
+jobs:
+    hello:
+        name: Hello World
+        runs-on: ubuntu-latest
+        steps:
+            - name: Print message
+              env:
+                ISSUE_NUMBER: ${{ github.event.issue.number }}
+                STATE_REASON: ${{ github.event.issue.state_reason }}
+              run: |
+                echo "issue: $ISSUE_NUMBER"
+                echo "reason: $STATE_REASON"
