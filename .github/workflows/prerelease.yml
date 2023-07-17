@@ -3,7 +3,7 @@ name: Pre-release
 on:
     workflow_dispatch:
     release:
-        types: [ created, edited ]
+        types: [ prereleased ]
     push:
         tags:
             - 'v**'
@@ -13,7 +13,7 @@ concurrency:
     cancel-in-progress: true
 
 # condition for running jobs
-# github.event_name == workflow_dispatch || github.event.release.prerelease
+# github.event_name == workflow_dispatch || github.event_name == push || github.event.release.prerelease
 
 jobs:
     hello:
