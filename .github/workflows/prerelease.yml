@@ -5,11 +5,24 @@ on:
     release:
         types: [ prereleased ]
 
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
 jobs:
     hello:
         name: Hello World
         runs-on: ubuntu-latest
         if: ${{ github.event.release.prerelease }}
+        env:
+            REF: ${{ github.ref }}
+            SHA: ${{ github.sha }}
+            REF_NAME: ${{ github.ref_name }}
+            ACTION: ${{ github.event.action }}
         steps:
             - name: Print message
-              run: echo "Hello World"
+              run: |
+                echo "ref: $REF"
+                echo "ref: $REF_NAME"
+                echo "sha: $SHA"
+                echo "action: $ACTION"

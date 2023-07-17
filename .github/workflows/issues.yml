@@ -7,7 +7,7 @@ jobs:
     not_planned_issue:
         name: Message about not planned issue
         runs-on: ubuntu-latest
-        if: ${{ github.event.action == 'closed' && !github.event.issue.pull_request.url && github.event.issue.state_reason == 'not_planned' }}
+        if: ${{ github.event.issue && github.event.action == 'closed' && github.event.issue.state_reason == 'not_planned' }}
         steps:
             - name: Print message
               env:
@@ -18,7 +18,7 @@ jobs:
     completed_issue:
         name: Message about completed issue
         runs-on: ubuntu-latest
-        if: ${{ github.event.action == 'closed' && !github.event.issue.pull_request.url && github.event.issue.state_reason == 'completed' }}
+        if: ${{ github.event.issue && github.event.action == 'closed' && github.event.issue.state_reason == 'completed' }}
         steps:
             - name: Print message
               env:
