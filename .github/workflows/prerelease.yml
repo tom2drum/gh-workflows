@@ -4,10 +4,16 @@ on:
     workflow_dispatch:
     release:
         types: [ created, edited ]
+    push:
+        tags:
+            - 'v**'
 
 concurrency:
     group: ${{ github.workflow }}-${{ github.ref }}
     cancel-in-progress: true
+
+# condition for running jobs
+# github.event_name == workflow_dispatch || github.event.release.prerelease
 
 jobs:
     hello:
