@@ -3,7 +3,7 @@ name: Pre-release
 on:
     workflow_dispatch:
     release:
-        types: [ prereleased ]
+        types: [ created, edited ]
 
 concurrency:
     group: ${{ github.workflow }}-${{ github.ref }}
@@ -23,7 +23,7 @@ jobs:
             - name: Print message
               run: |
                 echo "ref: $REF"
-                echo "ref: $REF_NAME"
+                echo "ref_name: $REF_NAME"
                 echo "sha: $SHA"
                 echo "action: $ACTION"
                 echo "pre-release: $PRERELEASE"
