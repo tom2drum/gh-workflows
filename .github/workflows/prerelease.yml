@@ -19,6 +19,7 @@ jobs:
             REF_NAME: ${{ github.ref_name }}
             ACTION: ${{ github.event.action }}
             PRERELEASE: ${{ github.event.release.prerelease }}
+            EVENT_NAME: ${{ github.event_name }}
         steps:
             - name: Print message
               run: |
@@ -27,3 +28,4 @@ jobs:
                 echo "sha: $SHA"
                 echo "action: $ACTION"
                 echo "pre-release: $PRERELEASE"
+                echo "event_name: $EVENT_NAME"
