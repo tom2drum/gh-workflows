@@ -2,11 +2,9 @@ name: Pre-release
 
 on:
     workflow_dispatch:
-    release:
-        types: [ prereleased ]
     push:
         tags:
-            - 'v**'
+            - 'v[0-9]+.[0-9]+.[0-9]+-[a-z]+'
 
 concurrency:
     group: ${{ github.workflow }}-${{ github.ref }}
